@@ -1,0 +1,20 @@
+.map-container {
+    width: 100%; /* Assurez-vous que le conteneur occupe toute la largeur de la colonne */
+    height: 80vh;
+    max-height: 80vh;
+    position: relative; /* Assurez-vous de la position relative pour le conteneur */
+    overflow: hidden; /* Masquez le débordement éventuel de la carte */
+  }
+
+  .scrollable {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 15px; /* Ajout d'un padding pour le défilement */
+    
+  }
+
+  // .map-container {
+  //   position: sticky;
+  //   top: 0;
+  // }
+  

@@ -1,0 +1,65 @@
+<mat-table [dataSource]="regionData">
+    <!-- Colonnes principales -->
+    <ng-container matColumnDef="region">
+      <mat-header-cell *matHeaderCellDef>Région</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.region }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="population">
+      <mat-header-cell *matHeaderCellDef>Population</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.nb_habitant }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="superficie">
+      <mat-header-cell *matHeaderCellDef>Superficie (km²)</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.superficie }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="densite">
+      <mat-header-cell *matHeaderCellDef>Densité (hab/km²)</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.densite }}</mat-cell>
+    </ng-container>
+
+    <!-- Colonnes supplémentaires -->
+    <ng-container matColumnDef="population_active">
+      <mat-header-cell *matHeaderCellDef
+        >Population active (%)</mat-header-cell
+      >
+      <mat-cell *matCellDef="let data">{{ data.population_active }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="prix_m2">
+      <mat-header-cell *matHeaderCellDef
+        >Prix moyen au m² (€)</mat-header-cell
+      >
+      <mat-cell *matCellDef="let data">{{ data.prix_m2 }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="revenu_moyen">
+      <mat-header-cell *matHeaderCellDef
+        >Revenu moyen par habitant (€)</mat-header-cell
+      >
+      <mat-cell *matCellDef="let data">{{ data.revenu_moyen }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="securite">
+      <mat-header-cell *matHeaderCellDef>Indice de sécurité</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.securite }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="taux_chomage">
+      <mat-header-cell *matHeaderCellDef>Taux de chômage (%)</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.taux_chomage }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="vie_pratique">
+      <mat-header-cell *matHeaderCellDef
+        >Qualité de vie pratique</mat-header-cell
+      >
+      <mat-cell *matCellDef="let data">{{ data.vie_pratique }}</mat-cell>
+    </ng-container>
+
+    <!-- Ligne d'en-tête et lignes de données -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>

@@ -1,0 +1,177 @@
+<div class="container p-1 content-left">
+  <nav *ngIf="breadcrumb.length > 0" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item text-center" *ngFor="let item of breadcrumb; let i = index">
+        <a class="label-custom" (click)="navigateTo(i)">{{ item }}</a>
+      </li>
+    </ol>
+</nav>
+  <ng-container *ngIf="currentView === 'regions';">
+    <h3 class="text-left my-4">Prix immobilier partout en France</h3>
+    <div class="card p-1">
+      <table class="table table-hover custom-table">
+        <thead>
+          <tr>
+            <th scope="col">Région</th>
+            <th scope="col">Prix m² Maximum</th>
+            <th scope="col">Prix m² Minimum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let item of regions"
+            (click)="highlightRegion(item.id)"
+            class="clickable-row"
+          >
+            <td>{{ item.properties.nom }}</td>
+            <td>{{ item.properties.stats["prix-m2"].max }} €</td>
+            <td>{{ item.properties.stats["prix-m2"].min }} €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="currentView === 'departments';">
+    <div *ngIf="loadingDepartments" class="text-center my-4">
+      <p>Chargement des départements...</p>
+    </div>
+    <ng-container *ngIf="!loadingDepartments">
+      <div class="card m-2 shadow">
+        <div class="card-body">
+          <h2 class="label-custom">Prix immobilier partout en {{ selectedRegion?.nom }}</h2>
+          <div class="container">
+            <div class="tabs">
+              <div class="tab active">Prix au m²</div>
+            </div>
+            <div class="price-section text-center">
+              <div>
+                <i class="fa-solid fa-building"></i>
+                <h2 class="label-custom">Prix m² Maximum </h2>
+                <p>{{ selectedRegion?.stats["prix-m2"].max  }} €</p>
+
+              </div>
+              <div>
+                <i class="fa-solid fa-building"></i>
+                <h2 class="label-custom">Prix m² Minimum </h2>
+                <p>{{ selectedRegion?.stats["prix-m2"].min  }} €</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card m-2 p-1 shadow">
+        <h2 class="card-header">Prix immobilier des départements</h2>
+        <table class="table table-hover custom-table">
+          <thead>
+            <tr>
+              <th scope="col">Département</th>
+              <th scope="col">Prix m² Maximum</th>
+              <th scope="col">Prix m² Minimum</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let department of departments"
+              (click)="highlightDepartment(department.id)"
+              class="clickable-row"
+            >
+              <td>{{ department.properties?.nom }}</td>
+              <td>{{ department.properties?.prix_m2_max }} €</td>
+              <td>{{ department.properties?.prix_m2_min }} €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="currentView === 'communes';">
+    <div *ngIf="loadingCommunes" class="text-center my-4">
+      <p>Chargement des communes...</p>
+    </div>
+    <ng-container *ngIf="!loadingCommunes">
+      <div class="card m-2 shadow">
+        <div
+          class="card-header d-flex justify-content-center mb-3 border-bottom"
+        ></div>
+        <div class="card m-2 shadow">
+          <div class="card-body">
+            <h2 class="label-custom">Prix immobilier partout en {{ selectedDepartment?.nom }}</h2>
+            <div class="container">
+              <div class="tabs">
+                <div class="tab active">Prix au m²</div>
+              </div>
+              <div class="price-section text-center">
+                <div>
+                  <i class="fa-solid fa-building"></i>
+                  <h2 class="label-custom">Prix m² Maximum </h2>
+                  <p>{{ selectedDepartment?.prix_m2_max  }} €</p>
+  
+                </div>
+                <div>
+                  <i class="fa-solid fa-building"></i>
+                  <h2 class="label-custom">Prix m² Minimum </h2>
+                  <p>{{ selectedDepartment?.prix_m2_min  }} €</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card m-2 p-1 shadow">
+        <h2 class="card-header">Prix immobilier des communes</h2>
+        <table class="table table-hover custom-table">
+          <thead>
+            <tr>
+              <th scope="col">Commune</th>
+              <th scope="col">Prix m² Maximum</th>
+              <th scope="col">Prix m² Minimum</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let commune of communes" class="clickable-row" (click)="highlightCommune(commune.id)">
+              <td>{{ commune.properties?.nom }}</td>
+              <td>{{ commune.properties?.prix_m2_max }} €</td>
+              <td>{{ commune.properties?.prix_m2_min }} €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="currentView === 'communesDetails';">
+    <div *ngIf="loadingCommunes" class="text-center my-4">
+      <p>Chargement des communes...</p>
+    </div>
+    <ng-container *ngIf="!loadingCommunes">
+      <div class="card m-2 shadow">
+        <div
+          class="card-header d-flex justify-content-center mb-3 border-bottom"
+        ></div>
+        <div class="card m-2 shadow">
+          <div class="card-body">
+            <h2 class="label-custom">Prix immobilier partout en {{ selectedCommune?.nom }}</h2>
+            <div class="container">
+              <div class="tabs">
+                <div class="tab active">Prix au m²</div>
+              </div>
+              <div class="price-section text-center">
+                <div>
+                  <i class="fa-solid fa-building"></i>
+                  <h2 class="label-custom">Prix m² Maximum </h2>
+                  <p>{{ selectedCommune?.prix_m2_max  }} €</p>
+  
+                </div>
+                <div>
+                  <i class="fa-solid fa-building"></i>
+                  <h2 class="label-custom">Prix m² Minimum </h2>
+                  <p>{{ selectedCommune?.prix_m2_min  }} €</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+</ng-container>
+</div>

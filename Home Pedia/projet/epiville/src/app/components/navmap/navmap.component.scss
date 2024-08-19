@@ -1,0 +1,24 @@
+.link-color-map {
+  color: #ffffff; /* Couleur du texte bleu foncé */
+  
+}
+.link-color-map:hover {
+  color: rgb(85, 168, 85); /* Couleur du texte bleu foncé */  
+  background-color: white;
+}
+
+
+.mat-toolbar {
+  background-color: #ffffff; /* Fond blanc */
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+  margin-right: auto; /* Alignement des liens à droite */
+}
+
+.epiville-navmap{
+  background-color: rgb(85, 168, 85);
+}
+

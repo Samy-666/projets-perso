@@ -1,0 +1,11 @@
+<mat-form-field appearance="fill">
+  <mat-label>Format</mat-label>
+  <mat-select
+    [value]="selectedFormat"
+    (selectionChange)="onFormatChange($event)"
+  >
+    <mat-option *ngFor="let format of FormatChart" [value]="format.type">
+      {{ format.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="selector">
+    <span>Ville: </span>
+    <app-ville-selector [villes]="villes" (villeSelected)="onSelectVille($event)" ></app-ville-selector>
+  </div>
+
+  <div *ngIf="villeData.data && selectedVille.length == 0">
+    <app-data-per-ville-table
+      [villeData]="villeData"
+      [displayedColumns]="displayedColumns"
+    ></app-data-per-ville-table>
+  </div>
+
+  <div *ngIf="selectedVille.length > 0">
+    <app-ville-detail [selectedVille]="selectedVille"></app-ville-detail>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+fastapi
+pyspark
+pandas
+uvicorn
+motor

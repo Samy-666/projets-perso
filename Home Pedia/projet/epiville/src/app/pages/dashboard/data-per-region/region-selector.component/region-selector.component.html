@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill">
+  <mat-label>Sélectionnez une région</mat-label>
+  <mat-select [(value)]="selectedRegion" (selectionChange)="onRegionSelected(selectedRegion)">
+    <mat-option disabled selected>Choisissez une région</mat-option>
+    <mat-option *ngFor="let region of filteredRegions" [value]="region">
+      {{ region.region }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

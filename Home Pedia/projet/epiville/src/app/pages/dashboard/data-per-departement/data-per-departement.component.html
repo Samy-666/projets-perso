@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="selector">
+    <span>Départements: </span>
+    <app-departement-selector
+      [departements]="departements"
+      (departementSelected)="onSelectDepartement($event)"
+    ></app-departement-selector>
+  </div>
+  <div class="selector">
+    <app-chart-format-selector
+      *ngIf="selectedDepartement.length > 0"
+      (formatChange)="onUpdateFormatChange($event)"
+    ></app-chart-format-selector>
+  </div>
+  <div *ngIf="departementData.data && selectedDepartement.length == 0">
+    <app-data-per-departement-table
+      [departementData]="departementData"
+      [displayedColumns]="displayedColumns"
+    ></app-data-per-departement-table>
+  </div>
+
+  <!-- <div *ngIf="selectedRegion.length > 0">
+    <div
+      class="region-data"
+      *ngFor="let region of selectedRegionDataFields"
+    ></div>
+  </div> -->
+
+  <div *ngIf="selectedDepartement.length > 0">
+    <app-grandes-villes-comparator [grandesVilles]="grandesVilles" [selectedFormat]="selectedFormat"></app-grandes-villes-comparator>
+  </div> 
+</div>

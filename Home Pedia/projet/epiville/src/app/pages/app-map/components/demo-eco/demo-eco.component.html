@@ -1,0 +1,202 @@
+<div class="container p-1 content-left">
+  <nav *ngIf="breadcrumb.length > 0" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item text-center" *ngFor="let item of breadcrumb; let i = index">
+        <a class="label-custom" (click)="navigateTo(i)">{{ item }}</a>
+      </li>
+    </ol>
+</nav>
+  <ng-container *ngIf="currentView === 'regions'; ">
+    <h3 class="text-left my-4">Demographie & Économie</h3>
+    <div class="card p-1">
+      <table class="table table-hover custom-table">
+        <thead>
+          <tr>
+            <th scope="col">Région</th>
+            <th scope="col">Nombre d'habitant</th>
+            <th scope="col">Taux Chomage</th>
+            <th scope="col">Population Active</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let item of regions"
+            (click)="highlightRegion(item.id)"
+            class="clickable-row"
+          >
+            <td>{{ item.properties.nom }}</td>
+            <td>{{ item.properties.nb_habitant}}</td>
+            <td>{{ item.properties.taux_chomage}} %</td>
+            <td>{{ item.properties.population_active }}</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+
+  
+  <ng-container *ngIf="currentView === 'departments';">
+    <div *ngIf="loadingDepartments" class="text-center my-4">
+      <p>Chargement des départements...</p>
+    </div>
+    <ng-container *ngIf="!loadingDepartments">
+      <div class="card m-2 shadow">
+        <div class="card-body">
+          <h2 class="label-custom">Demographie & Économie en {{ selectedRegion?.nom }}</h2>
+          <div class="container">
+            <div class="tabs">
+              <div class="tab active">Prix au m²</div>
+            </div>
+            <div class="price-section text-center">
+              <div class="m-1">
+                <i class="fa-solid fa-building"></i>
+                <h2 class="label-custom">Nombre d'habitant</h2>
+                <p>{{ selectedRegion?.stats["nb_habitant"]  }} </p>
+
+              </div>
+              <div class="m-1">
+                <i class="fa-solid fa-building"></i>
+                <h2 class="label-custom">Taux de chomage</h2>
+                <p>{{ selectedRegion?.stats["taux-chomage"]  }} %</p>
+              </div>
+              <div class="m-1">
+                <i class="fa-solid fa-building"></i>
+                <h2 class="label-custom">Population Active </h2>
+                <p>{{ selectedRegion?.stats["population-active"]  }} </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card m-2 p-1 shadow">
+        <h2 class="card-header">Demographie & Économie des départements</h2>
+        <table class="table table-hover custom-table">
+          <thead>
+            <tr>
+              <th scope="col">Département</th>
+              <th scope="col">Nombre d'habitant</th>
+              <th scope="col">Taux Chomage</th>
+              <th scope="col">Population Active</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let department of departments"
+              (click)="highlightDepartment(department.id)"
+              class="clickable-row"
+            >
+              <td>{{ department.properties?.nom }}</td>
+              <td>{{ department.properties?.nb_habitant }} €</td>
+              <td>{{ department.properties?.taux_chomage }} €</td>
+              <td>{{ department.properties?.population_active }} €</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="currentView === 'communes';">
+    <div *ngIf="loadingCommunes" class="text-center my-4">
+      <p>Chargement des communes...</p>
+    </div>
+    <ng-container *ngIf="!loadingCommunes">
+      <div class="card m-2 shadow">
+        <div
+          class="card-header d-flex justify-content-center mb-3 border-bottom"
+        ></div>
+        <div class="card-body text-center">
+          <h2>Demographie & Économie en {{ selectedDepartment?.nom }}</h2>
+          <div class="row">
+            <div class="container">
+              <div class="tabs">
+                <div class="tab active">Prix au m²</div>
+              </div>
+              <div class="price-section text-center">
+                <div class="m-1">
+                  <i class="fa-solid fa-building"></i>
+                  <h2 class="label-custom">Nombre d'habitant</h2>
+                  <p>{{ selectedDepartment?.nb_habitant   }} </p>
+  
+                </div>
+                <div class="m-1">
+                  <i class="fa-solid fa-building"></i>
+                  <h2 class="label-custom">Taux de chomage</h2>
+                  <p>{{ selectedDepartment?.taux_chomage  }} %</p>
+                </div>
+                <div class="m-1">
+                  <i class="fa-solid fa-building"></i>
+                  <h2 class="label-custom">Population Active </h2>
+                  <p>{{ selectedDepartment?.population_active  }} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card m-2 p-1 shadow">
+        <h2 class="card-header">Demographie & Économie des communes</h2>
+        <table class="table table-hover custom-table">
+          <thead>
+            <tr>
+              <th scope="col">Commune</th>
+              <th scope="col">Nombre d'habitant</th>
+              <th scope="col">Taux Chomage</th>
+              <th scope="col">Population Active</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let commune of communes" class="clickable-row" (click)="highlightCommune(commune.id)">
+              <td>{{ commune.properties?.nom }}</td>
+              <td>{{ commune.properties?.nb_habitant }} €</td>
+              <td>{{ commune.properties?.taux_chomage }} €</td>
+              <td>{{ commune.properties?.population_active }} €</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="currentView === 'communesDetails';">
+    <div *ngIf="loadingCommunes" class="text-center my-4">
+      <p>Chargement des communes...</p>
+    </div>
+    <ng-container *ngIf="!loadingCommunes">
+      <div class="card m-2 shadow">
+        <div
+          class="card-header d-flex justify-content-center mb-3 border-bottom"
+        ></div>
+        <div class="card-body text-center">
+          <h2>Demographie & Économie en {{ selectedCommune?.nom }}</h2>
+          <div class="row">
+            <div class="container">
+              <div class="price-section text-center">
+                <div class="m-1">
+                  <i class="fa-solid fa-building"></i>
+                  <h2 class="label-custom">Nombre d'habitant</h2>
+                  <p>{{ selectedCommune?.nb_habitant   }} </p>
+  
+                </div>
+                <div class="m-1">
+                  <i class="fa-solid fa-building"></i>
+                  <h2 class="label-custom">Taux de chomage</h2>
+                  <p>{{ selectedCommune?.taux_chomage  }} %</p>
+                </div>
+                <div class="m-1">
+                  <i class="fa-solid fa-building"></i>
+                  <h2 class="label-custom">Population Active </h2>
+                  <p>{{ selectedCommune?.population_active  }} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+</ng-container>
+</div>

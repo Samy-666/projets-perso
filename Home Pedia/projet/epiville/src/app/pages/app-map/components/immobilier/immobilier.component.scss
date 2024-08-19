@@ -1,0 +1,165 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  color: rgb(85, 168, 85);
+  padding: 10px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+}
+
+.table thead th {
+  border-bottom: 1px solid #000; /* Trait plus fin */
+  font-weight: normal; /* En-têtes sans gras */
+}
+
+.table tbody tr {
+  border-bottom: 0.5px solid #dee2e6;
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+
+.custom-table {
+  border: none;
+}
+
+.custom-table th, .custom-table td {
+  border: none;
+}
+
+.custom-table thead th {
+  border-bottom: 0.8px solid #000;
+}
+
+.custom-table tbody tr {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+
+.clickable-row td:first-child {
+  color: rgb(85, 168, 85); /* Valeurs des régions en bleu comme un lien */
+  cursor: pointer;
+}
+
+.clickable-row td:first-child:hover {
+  text-decoration: underline; /* Souligner au survol */
+}
+
+.clickable-row td:hover {
+    text-decoration: underline; /* Souligner au survol */
+}
+
+
+.theme-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-primary {
+  color: #007bff;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.label-custom{
+  color: rgb(85, 168, 85);
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  margin: 0 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.tab.active {
+  border-bottom: 2px solid rgb(85, 168, 85);
+  font-weight: bold;
+}
+
+.price-section {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.price-section div {
+  width: 45%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.price-section i {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.confidence-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.confidence-indicator div {
+  width: 10px;
+  height: 10px;
+  margin: 0 2px;
+  border-radius: 50%;
+  background-color: #ddd;
+}
+
+.confidence-indicator .active {
+  background-color: green;
+}

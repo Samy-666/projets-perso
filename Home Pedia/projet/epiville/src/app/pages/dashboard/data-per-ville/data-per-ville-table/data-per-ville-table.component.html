@@ -1,0 +1,28 @@
+<mat-table [dataSource]="villeData">
+    <!-- Colonnes principales -->
+    <ng-container matColumnDef="Commune">
+      <mat-header-cell *matHeaderCellDef>Commune</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.Commune }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Valeur fonciere moyenne">
+      <mat-header-cell *matHeaderCellDef>Valeur foncière moyenne</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.Valeur_fonciere_moyenne }}€</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Prix Moyen m2">
+      <mat-header-cell *matHeaderCellDef>Prix Moyen m²</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.Prix_moyen_m2_commune }}€</mat-cell>
+    </ng-container>
+
+    <!-- Colonnes supplémentaires -->
+    <ng-container matColumnDef="Prix median m2">
+      <mat-header-cell *matHeaderCellDef
+        >Prix median m²</mat-header-cell
+      >
+      <mat-cell *matCellDef="let data">{{ data.Prix_median_m2 }}€</mat-cell>
+    </ng-container>
+
+    <!-- Ligne d'en-tête et lignes de données -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>

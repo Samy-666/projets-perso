@@ -1,0 +1,7 @@
+spacy
+sounddevice
+google.api_core.exceptions
+scipy.io.wavfile
+networkx
+matplotlib
+pyplot

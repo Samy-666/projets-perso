@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill">
+  <mat-label>Sélectionnez une département</mat-label>
+  <mat-select [(value)]="selectedDepartement" (selectionChange)="onDepartementSelected(selectedDepartement)">
+    <mat-option disabled selected>Choisissez une département</mat-option>
+    <mat-option *ngFor="let dep of filteredDepartements" [value]="dep">
+      {{ dep.departement }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

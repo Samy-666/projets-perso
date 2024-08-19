@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ville Info</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .card {
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    .card p {
+      margin: 10px 0;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card securite" *ngIf="villeData?.ville">
+      <h3>Ville</h3>
+      <p>{{ villeData?.ville }}</p>
+    </div>
+
+    <div class="card securite" *ngIf="villeData?.securite">
+      <h3>Sécurité</h3>
+      <p>Note de Sécurité: {{ villeData?.securite }}</p>
+    </div>
+
+    <div class="card culture" *ngIf="villeData?.culture">
+      <h3>Culture</h3>
+      <p>Note de Culture: {{ villeData?.culture }}</p>
+    </div>
+
+    <div class="card animation" *ngIf="villeData?.animation">
+      <h3>Animation</h3>
+      <p>Note d'Animation: {{ villeData?.animation }}</p>
+    </div>
+
+    <div class="card environnement" *ngIf="villeData?.environnement">
+      <h3>Environnement</h3>
+      <p>Note d'environnement: {{ villeData?.environnement }}</p>
+    </div>
+
+    <div class="card culture" *ngIf="villeData?.culture">
+      <h3>Culture</h3>
+      <p>Note de culture: {{ villeData?.culture }}</p>
+    </div>
+
+    <div class="card nb_habitant" *ngIf="villeData?.nb_habitant">
+      <h3>Nombre d'habitants</h3>
+      <p>{{ villeData?.nb_habitant }}</p>
+    </div>
+
+    <div class="card prix_m2" *ngIf="villeData?.prix_m2">
+      <h3>Prix au m²</h3>
+      <p>{{ villeData?.prix_m2 }}</p>
+    </div>
+
+    <div class="card population_active" *ngIf="villeData?.population_active">
+      <h3>Population Active</h3>
+      <p>{{ villeData?.population_active }}</p>
+    </div>
+
+    <div class="card revenu_moyen" *ngIf="villeData?.revenu_moyen">
+      <h3>Revenu Moyen</h3>
+      <p>{{ villeData?.revenu_moyen }}</p>
+    </div>
+
+    <div class="card superficie" *ngIf="villeData?.superficie">
+      <h3>Superficie</h3>
+      <p>{{ villeData?.superficie }}</p>
+    </div>
+
+    <div class="card taux_chomage" *ngIf="villeData?.taux_chomage">
+      <h3>Taux de chômage</h3>
+      <p>{{ villeData?.taux_chomage }}</p>
+    </div>
+
+    <div class="card vie_pratique" *ngIf="villeData?.vie_pratique">
+      <h3>Vie Pratique</h3>
+      <p>Note de vie pratique: {{ villeData?.vie_pratique }}</p>
+    </div>
+  </div>
+</body>
+</html>

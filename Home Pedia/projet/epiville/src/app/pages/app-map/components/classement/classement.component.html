@@ -1,0 +1,158 @@
+<div class="container p-1 content-left">
+    <nav *ngIf="breadcrumb.length > 0" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item text-center" *ngFor="let item of breadcrumb; let i = index">
+            <a class="label-custom" (click)="navigateTo(i)">{{ item }}</a>
+          </li>
+        </ol>
+    </nav>
+    <ng-container *ngIf="currentView === 'regions';">
+      <h3 class="text-left my-4">Classement</h3>
+      <div class="card p-1">
+        <table class="table table-hover custom-table">
+          <thead>
+            <tr>
+              <th scope="col">Région</th>
+              <th scope="col">Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of regions" (click)="highlightRegion(item.id)" class="clickable-row">
+              <td>{{ item.properties.nom }}</td>
+              <td>{{ item.properties.average_rating | number:'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="currentView === 'departments';">
+      <div *ngIf="loadingDepartments" class="text-center my-4">
+        <p>Chargement des départements...</p>
+      </div>
+      <ng-container *ngIf="!loadingDepartments">
+        <div class="card m-2 shadow">
+          <h2 class="card-header p-2 ml-1">Notes</h2>
+          <div class="card-body text-center">
+            <h2>{{ selectedRegion?.nom }}</h2>
+            <div class="row align-content-center text-center d-flex justify-content-center">
+              <div class="col-3 p-2 m-3" *ngFor="let theme of selectedRegion?.theme_averages | keyvalue">
+                <div class="">
+                  <div class="">
+                    <i class="fas" [ngClass]="theme.key | themeIcon" class="mb-3" style="font-size: 2rem;"></i>
+                    <div class="font-weight-bold text-uppercase label-custom">{{ theme.key }}</div>
+                    <div class="display-4" style="font-size: 1.5rem;">{{ getThemeValue(theme.value) | number:'1.1-1' }}</div>
+                  </div>
+                </div>
+                <div>
+                  <ng-container *ngFor="let i of [].constructor(5)">
+                    <i class="fas" [ngClass]="{
+                        'fa-circle text-primary': i < getThemeValue(theme.value),
+                        'fa-circle text-muted': i >= getThemeValue(theme.value)
+                      }" style="font-size: 0.75rem;"></i>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card m-2 p-1 shadow">
+          <h2 class="card-header">Classement des départements</h2>
+          <table class="table table-hover custom-table">
+            <thead>
+              <tr>
+                <th scope="col">Département</th>
+                <th scope="col">Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let department of departments" (click)="highlightDepartment(department.id)" class="clickable-row">
+                <td>{{ department.properties?.nom }}</td>
+                <td>{{ department.properties?.average_rating | number:'1.2-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="currentView === 'communes';">
+      <div *ngIf="loadingCommunes" class="text-center my-4">
+        <p>Chargement des communes...</p>
+      </div>
+      <ng-container *ngIf="!loadingCommunes">
+        <div class="card m-2 shadow">
+          <div class="card-header d-flex justify-content-center mb-3 border-bottom">
+            <div class="p-2 mx-2 border-bottom border-primary">Notes</div>
+          </div>
+          <div class="card-body text-center">
+            <h2>{{ selectedDepartment?.nom }}</h2>
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-4 mb-4" *ngFor="let theme of selectedDepartment?.theme_averages | keyvalue">
+                <div class="theme-card p-3">
+                  <div class="font-weight-bold text-uppercase">{{ theme.key }}</div>
+                  <div class="display-4 text-primary">{{ getThemeValue(theme.value) | number:'1.1-1' }}</div>
+                  <div>
+                    <ng-container *ngFor="let i of [].constructor(5)">
+                      <i class="fas" [ngClass]="{
+                          'fa-circle text-primary': i < getThemeValue(theme.value),
+                          'fa-circle text-muted': i >= getThemeValue(theme.value)
+                        }"></i>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card m-2 p-1 shadow">
+          <h2 class="card-header">Classement des communes</h2>
+          <table class="table table-hover custom-table">
+            <thead>
+              <tr>
+                <th scope="col">Commune</th>
+                <th scope="col">Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let commune of communes" class="clickable-row" (click)="highlightCommune(commune.id)">
+                <td>{{ commune.properties?.nom }}</td>
+                <td>{{ commune.properties?.average_rating | number:'1.2-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="currentView === 'communesDetails';">
+        <div *ngIf="loadingCommunes" class="text-center my-4">
+          <p>Chargement des communes...</p>
+        </div>
+        <ng-container *ngIf="!loadingCommunes">
+          <div class="card m-2 shadow">
+            <div class="card-header d-flex justify-content-center mb-3 border-bottom">
+              <div class="p-2 mx-2 border-bottom border-primary">Notes</div>
+            </div>
+            <div class="card-body text-center">
+              <h2>{{ selectedCommune?.nom }}</h2>
+              <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 mb-4" *ngFor="let theme of selectedCommune?.theme_averages | keyvalue">
+                  <div class="theme-card p-3">
+                    <div class="font-weight-bold text-uppercase">{{ theme.key }}</div>
+                    <div class="display-4 text-primary">{{ getThemeValue(theme.value) | number:'1.1-1' }}</div>
+                    <div>
+                      <ng-container *ngFor="let i of [].constructor(5)">
+                        <i class="fas" [ngClass]="{
+                            'fa-circle text-primary': i < getThemeValue(theme.value),
+                            'fa-circle text-muted': i >= getThemeValue(theme.value)
+                          }"></i>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+    </ng-container>
+  </div>
+  

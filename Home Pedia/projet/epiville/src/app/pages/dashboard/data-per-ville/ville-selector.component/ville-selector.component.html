@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill">
+  <mat-label>Sélectionnez une ville</mat-label>
+  <mat-select [(value)]="selectedVille" (selectionChange)="onVilleSelected(selectedVille)">
+    <mat-option disabled selected>Choisissez une ville</mat-option>
+    <mat-option *ngFor="let ville of filteredVilles" [value]="ville">
+      {{ ville.nom_ville }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
